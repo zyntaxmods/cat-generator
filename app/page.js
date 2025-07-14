@@ -3,6 +3,7 @@
 import { Raleway } from "next/font/google";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function page(){
 	const [cat, setCat] = useState(null);
@@ -24,7 +25,7 @@ export default function page(){
 			setLoad(true);
 		try {
 			const url = `https://cataas.com/cat/says/${name}?fontSize=${size}&fontColor=${color}`;
-			const res = await fetch(url);
+			const res = await fetch(url, {cache: "no-store"});
 			const data = await res.blob();
 			const raw = URL.createObjectURL(data);
 			setCat(raw);
@@ -82,7 +83,10 @@ export default function page(){
         {!cat ? null : (
           <div className="flex flex-col gap-5 justify-center items-center">
             <span className="font-bold">Preview:</span>
-              <img
+              <Image
+			  	width={200}
+				height={200}
+				priority
                 src={cat}
                 alt={name}
                 className="rounded-2xl opacity-100 transition-all"
