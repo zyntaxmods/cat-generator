@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-export default function page(){
+export default function Page(){
 	const [cat, setCat] = useState(null);
 	let [name, setName] = useState("");
 	let [size, setSize] = useState("");
